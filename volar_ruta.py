@@ -1,16 +1,16 @@
 """
-Prueba_ruta_carrot.py — VERSIÓN 3 de 3
+volar_ruta.py — VERSIÓN 3 de 3
 
 MÉTODO: "zanahoria móvil". Se calcula en el PC un punto que avanza sobre
 la ruta y se le manda al dron como CONSIGNA DE POSICIÓN a 50 Hz
 (`send_position_setpoint`). El controlador de posición del dron persigue
 esa consigna; el punto nunca se para, así que el dron tampoco frena.
 
-No modifica Prueba_ruta_vision.py: lo importa y le inyecta esta función.
+No modifica sistema_vuelo.py: lo importa y le inyecta esta función.
 Cámara, paro de emergencia, MoCap, gráficas e informe son idénticos a las
 otras dos versiones, así que la comparación es limpia.
 
-    python Prueba_ruta_carrot.py
+    python volar_ruta.py
 
 ──────────────────────────────────────────────────────────────────────────
 POR QUÉ ESTE TERCER MÉTODO Y NO UNA VARIANTE DE LOS OTROS
@@ -58,7 +58,7 @@ import sys
 import time
 import numpy as np
 
-import Prueba_ruta_vision as P
+import sistema_vuelo as P
 from maniobra_evasion import ManiobraEvasion
 
 
@@ -88,7 +88,7 @@ VISION_ESPERA_S = 120.0  # modelo listo y mapas nuevos antes de despegar
 # orientación del MoCap el EKF usa giroscopio+acelerómetro para roll/pitch.
 P.USAR_ORIENTACION_MOCAP = False
 # El preámbulo (despegue, ir al inicio, mantenerse) es el de
-# Prueba_ruta_vision.py en modo 'pursuit', que despega bien en cualquier
+# sistema_vuelo.py en modo 'pursuit', que despega bien en cualquier
 # punto: velocidad corregida con el MoCap desde el PC y SIN reiniciar el EKF
 # antes de subir (reiniciarlo justo antes lo dejaba sin asentar).
 ALINEAR_YAW_ANTES_DE_DESPEGAR = False
@@ -281,7 +281,7 @@ YAW_MONTAJE_DEG = 5.2     # ✓ CONFIRMADO 17-sep-2026 con dos vuelos.
                           # redefine ahí o si se mueve la cámara en el dron.
                           # Se vuelve a medir en 30 s, sin volar:
                           #
-                          #     python Prueba_ruta_carrot.py --calibrar
+                          #     python volar_ruta.py --calibrar
                           #
                           # ── HISTORIA, PARA NO REPETIRLA ──
                           # 180.0  estimado a ojo de dos vuelos (pre 12-sep)
@@ -687,7 +687,7 @@ EVASION_RADIO_PARO = 0.22   # m: más cerca que esto y justo delante → se
 EVASION_ANCHO_PARO = 0.18   # m: medio ancho del corredor que mira el paro
 
 # Calibración disparidad → metros. Se obtiene con:
-#     python Prueba_ruta_carrot.py --calibrar-midas
+#     python volar_ruta.py --calibrar-midas
 # Sin esto, la evasión funciona igual pero SOLO con la señal relativa: sabe
 # que hay algo cerca y en qué dirección, no a cuántos metros.
 # Medido 12-sep-2026 con trípode a 0.30 / 0.40 / 0.60 m.
@@ -1271,7 +1271,7 @@ class Evasion:
             print('  Sin calibrar (EVASION_CAL_A/B = None): se usa solo la')
             print('  señal RELATIVA — sabe que hay algo cerca y en qué')
             print('  dirección, pero no a cuántos metros. Para calibrar:')
-            print('    python Prueba_ruta_carrot.py --calibrar-midas')
+            print('    python volar_ruta.py --calibrar-midas')
         else:
             print(f'  Calibrada: a={self.cal.a:.5f}  b={self.cal.b:.4f}')
 
@@ -2080,7 +2080,7 @@ def calibrar_midas():
 
     print()
     if sano:
-        print('  Copia esto en Prueba_ruta_carrot.py:')
+        print('  Copia esto en volar_ruta.py:')
         print()
         print(f'      EVASION_CAL_A = {r["a"]:.6f}')
         print(f'      EVASION_CAL_B = {r["b"]:.6f}')
@@ -2101,7 +2101,7 @@ def calibrar_midas():
 
 def calibrar_montaje():
     """
-    Mide YAW_MONTAJE_DEG de verdad.   python Prueba_ruta_carrot.py --calibrar
+    Mide YAW_MONTAJE_DEG de verdad.   python volar_ruta.py --calibrar
 
     POR QUÉ HACE FALTA, Y POR QUÉ NO VALE MEDIRLO EN VUELO
     El lazo de yaw fuerza (y_moc − M) → dirección deseada, donde M es el
@@ -2197,7 +2197,7 @@ class VerificadorCamara:
     la cámara mire a 90°. Verifica que el LAZO CIERRA, no hacia dónde
     mira la cámara.
 
-    Para lo segundo:  python Prueba_ruta_carrot.py --calibrar
+    Para lo segundo:  python volar_ruta.py --calibrar
     """
 
     V_MINIMA = 0.06      # m/s: por debajo, la dirección de avance es ruido
@@ -2353,7 +2353,7 @@ def ejecutar_ruta_carrot(scf, ruta_suave_2d, cultivo):
 
     def ir_al_inicio(dst, max_v=0.20, kp=0.6, tol=0.04, timeout=15.0):
         """
-        Copiada de ejecutar_ruta_pursuit (Prueba_ruta_vision.py), que llega
+        Copiada de ejecutar_ruta_pursuit (sistema_vuelo.py), que llega
         bien desde cualquier punto: velocidad corregida con el MoCap desde el
         PC. kp=0.6 en horizontal con tope 0.20 m/s y kp_z=0.8 con tope
         ±0.15 m/s; más ganancia no llega antes, llega oscilando.

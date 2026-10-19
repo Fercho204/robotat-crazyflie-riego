@@ -740,7 +740,7 @@ except Exception:
 # MODO COMPATIBLE CON EL ORIGINAL  ← LEE ESTO ANTES DE TOCAR NADA
 # ═══════════════════════════════════════════════════════════════
 # Con True, la ruta de datos MoCap → EKF y el tráfico de radio quedan
-# EXACTAMENTE como en `Prueba_ruta.py`. Lo único que se añade es la cámara,
+# EXACTAMENTE como en la primera versión del planificador. Lo único que se añade es la cámara,
 # que vive en otra red y no toca la radio.
 #
 # POR QUÉ EXISTE ESTO
@@ -822,7 +822,7 @@ elif MODO_COMPATIBLE_ORIGINAL:
     # El monitor del estimador se queda: es solo un log de lectura y es lo
     # que permite saber si el error es de estimación o de control.
     print('[cfg] MODO_COMPATIBLE_ORIGINAL=True — ruta MoCap→EKF y radio '
-          'idénticas a Prueba_ruta.py. Solo se añade la cámara.')
+          'idénticas a la primera versión. Solo se añade la cámara.')
 else:
     # Escalón 1 de la escalera de arriba. 'contenido' no mira el `ts`, así
     # que la resolución de un segundo deja de importar; el limitador de Hz
@@ -3867,9 +3867,9 @@ def precargar_midas(nombre_modelo=VISION_MODELO):
     """
     Descarga los pesos a ~/.cache/torch para poder usarlos SIN internet.
     Ejecútalo una vez conectado a tu WiFi normal:
-        py -c "import Prueba_ruta_vision as p; p.precargar_midas()"
+        py -c "import sistema_vuelo as p; p.precargar_midas()"
     Para Depth Anything V2 (los pesos van a ~/.cache/huggingface):
-        py -c "import Prueba_ruta_vision as p; p.precargar_midas('depth_anything_v2')"
+        py -c "import sistema_vuelo as p; p.precargar_midas('depth_anything_v2')"
     Después ya puedes conectarte al AP del AI-deck.
     """
     if nombre_modelo == 'hibrido':
@@ -6271,7 +6271,7 @@ if __name__ == "__main__":
 # MODELO SIN INTERNET
 #   La primera vez, MiDaS se descarga de internet. Con internet disponible,
 #   ejecuta una vez:
-#       python -c "import Prueba_ruta_vision as p; p.precargar_midas()"
+#       python -c "import sistema_vuelo as p; p.precargar_midas()"
 #   Después ya funciona sin conexión a internet.
 #
 # AJUSTE RÁPIDO

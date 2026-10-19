@@ -23,7 +23,7 @@ def main():
                    _mocap_gate={'x': None, 'y': None, 'z': None, 't': None,
                                't_primer_rechazo': None})
 
-    scope = extraer('Prueba_ruta_vision.py', ['_filtrar_salto_mocap'], entorno())
+    scope = extraer('sistema_vuelo.py', ['_filtrar_salto_mocap'], entorno())
     f = scope['_filtrar_salto_mocap']
 
     # Ráfaga real de llegadas: 2 cm inmediatamente, sin sleep.
@@ -101,7 +101,7 @@ def main():
                 (x, y, z) == (0.0, 0.0, 0.5), (0.0, 0.0, 0.5), (x, y, z))
 
     # ── MoCap congelado: la pose se repite idéntica aunque lleguen mensajes ──
-    cong = extraer('Prueba_ruta_vision.py', ['_registrar_cambio_mocap'],
+    cong = extraer('sistema_vuelo.py', ['_registrar_cambio_mocap'],
                    dict(MOCAP_CONGELADO_S=0.25, _t_mocap_cambio=[0.0],
                         _mocap_ult_crudo=[None]))
     reg = cong['_registrar_cambio_mocap']

@@ -7,7 +7,7 @@ def main():
     b = Banco()
     reloj = [100.0]
     estado = {'v': None, 't': 0.0, 'critica_desde': None}
-    avisar = extraer_metodo('Prueba_ruta_vision.py', 'MonitorBateria', '_avisar',
+    avisar = extraer_metodo('sistema_vuelo.py', 'MonitorBateria', '_avisar',
                            {'time': NS(time=lambda: reloj[0]),
                             '_bateria_estado': estado,
                             'BATERIA_CRITICA_V': 3.0, 'BATERIA_AVISO_V': 3.3})

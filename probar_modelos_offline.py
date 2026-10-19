@@ -57,7 +57,7 @@ def main():
     torch = NS(set_num_threads=lambda n: None, device=lambda x:x,
                hub=NS(load=cargar), no_grad=contextlib.nullcontext,
                nn=NS(functional=NS(interpolate=lambda x, **kw:x)))
-    scope = extraer('Prueba_ruta_vision.py', ['EstimadorMiDaS'],
+    scope = extraer('sistema_vuelo.py', ['EstimadorMiDaS'],
                     dict(torch=torch, _HAY_TORCH=True, VISION_HILOS_TORCH=1,
                          os=os, cv2=NS(COLOR_BGR2RGB=1, cvtColor=lambda x,c:x[:,:,::-1])))
     for nombre in ('midas', 'depth_anything_v2'):

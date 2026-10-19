@@ -1,7 +1,7 @@
 """
 evasion.py — Detección de obstáculos con MiDaS y desvío de la zanahoria.
 
-Se usa desde Prueba_ruta_carrot.py. Todo lo de aquí son funciones puras
+Se usa desde volar_ruta.py. Todo lo de aquí son funciones puras
 o clases sin estado global, para poder probarlo sin volar.
 
 ══════════════════════════════════════════════════════════════════════════

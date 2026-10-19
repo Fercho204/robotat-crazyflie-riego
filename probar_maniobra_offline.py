@@ -7,7 +7,7 @@ from maniobra_evasion import ManiobraEvasion, wrap
 
 
 def constantes():
-    tree = ast.parse(Path('Prueba_ruta_carrot.py').read_text(encoding='utf-8'))
+    tree = ast.parse(Path('volar_ruta.py').read_text(encoding='utf-8'))
     cfg = {}
     for n in tree.body:
         if isinstance(n, ast.Assign):
@@ -36,7 +36,7 @@ def simular(y_obst=0., sin_vista=False, lado_ocupado=False, corte=False):
     m = crear()
     c = constantes()
     pos, yaw = np.zeros(2), [0.]
-    scope = extraer('Prueba_ruta_carrot.py', ['ControlYaw','_wrap'],
+    scope = extraer('volar_ruta.py', ['ControlYaw','_wrap'],
                     {**c, '_yaw_mundo_del_mocap':lambda:yaw[0]})
     yc = scope['ControlYaw']()
     yc.fijar(0.)

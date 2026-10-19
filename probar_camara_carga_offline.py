@@ -77,7 +77,7 @@ def _carga(stop):
 def escenario(receptor, n_hilos, dur, modo_srv='normal', puerto=5650):
     """Corre en un proceso propio; imprime una lÃ­nea JSON con el resultado."""
     sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
-    import Prueba_ruta_vision as P
+    import sistema_vuelo as P
     P.VISION_FPS_MINIMO = 0
     P.VISION_RECONECTAR = False
     P.VISION_TIMEOUT_LECTURA = 1.5

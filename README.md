@@ -9,14 +9,14 @@ El programa deja dibujar un área de cultivo, genera una ruta de cobertura en zi
 - Windows 10 u 11. Los scripts leen el teclado con `msvcrt`, que solo existe en Windows.
 - Python 3.11.
 - Crazyflie 2.1 con AI-deck 1.1, Crazyradio y marcadores de OptiTrack.
-- Acceso a la red del Robotat (broker MQTT `192.168.50.200`, puerto `1880`, tópico `mocap/drone1`) y a la red WiFi del AI-deck (`192.168.4.1`).
+- Acceso a la red del Robotat (broker MQTT `192.168.50.200`, puerto `1880`, tópico `mocap/drone1`) y a la red WiFi del AI-deck (`192.168.4.1`) al mismo tiempo. Para eso se usa una antena WiFi USB conectada a la red del Robotat y la tarjeta WiFi interna conectada al AI-deck.
 
 ## Instalación
 
 ```powershell
 py -3.11 -m pip install -r requirements.txt
 # Una vez, con internet, para descargar los modelos de profundidad
-py -3.11 -c "import Prueba_ruta_vision as p; p.precargar_midas('hibrido')"
+py -3.11 -c "import sistema_vuelo as p; p.precargar_midas('hibrido')"
 ```
 
 El Crazyradio necesita el controlador libusb, que se instala con Zadig siguiendo la guía de Bitcraze.
@@ -25,9 +25,9 @@ El Crazyradio necesita el controlador libusb, que se instala con Zadig siguiendo
 
 ```powershell
 py -3.11 Prueba_despegue.py        # prueba de radio y motores, sin OptiTrack
-py -3.11 Prueba_ruta_carrot.py     # planificador y vuelo de la ruta
-py -3.11 Prueba_ruta_carrot.py --calibrar        # montaje de la cámara, no vuela
-py -3.11 Prueba_ruta_carrot.py --calibrar-midas  # distancia del modelo de profundidad, no vuela
+py -3.11 volar_ruta.py     # planificador y vuelo de la ruta
+py -3.11 volar_ruta.py --calibrar        # montaje de la cámara, no vuela
+py -3.11 volar_ruta.py --calibrar-midas  # distancia del modelo de profundidad, no vuela
 ```
 
 Hay que lanzarlos desde esta carpeta. En el planificador se dibuja el área con clics y se cierra con Enter, se revisa la simulación, se puede guardar la ruta en `rutas_guardadas` y se confirma con VOLAR. Después se elige el cultivo, que fija la altura de vuelo.
@@ -36,10 +36,12 @@ Hay que lanzarlos desde esta carpeta. En el planificador se dibuja el área con 
 
 ## Archivos
 
+Para volar hacen falta estos ocho archivos en la misma carpeta: `volar_ruta.py`, `sistema_vuelo.py`, `crazyflie_python_commands_mod.py`, `evasion.py`, `maniobra_evasion.py`, `pursuit_ruta.py`, `trayectoria_suave.py` y `puente_camara.py`. Con descargar el repositorio completo ya están todos.
+
 | Archivo | Qué hace |
 |---|---|
-| `Prueba_ruta_carrot.py` | Programa principal. Vuelo con zanahoria móvil y evasión de obstáculos |
-| `Prueba_ruta_vision.py` | Librería con la interfaz, el MoCap por MQTT, la cámara, el paro de emergencia y la generación de rutas |
+| `volar_ruta.py` | Programa principal. Vuelo con zanahoria móvil y evasión de obstáculos |
+| `sistema_vuelo.py` | Librería con la interfaz, el MoCap por MQTT, la cámara, el paro de emergencia y la generación de rutas |
 | `crazyflie_python_commands_mod.py` | Conexión con el Crazyflie y reinicio del filtro de Kalman |
 | `evasion.py`, `maniobra_evasion.py` | Detección de obstáculos y maniobra para rodearlos |
 | `pursuit_ruta.py`, `trayectoria_suave.py` | Geometría y perfil de velocidad de la ruta |

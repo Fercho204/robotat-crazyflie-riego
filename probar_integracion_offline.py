@@ -14,7 +14,7 @@ def main():
     # constantes() solo lee literales; EVASION_PERCENTIL se deriva del modelo.
     cfg['EVASION_PERCENTIL']=cfg['EVASION_PERCENTIL_POR_MODELO'].get(cfg['VISION_MODELO'],90.0)
     cfg.update(EVASION_MODO='esquivar', EVASION_DISP_AUTO=False, EVASION_DISP_MIN=10.)
-    scope=extraer('Prueba_ruta_carrot.py',['Evasion','_MidiendoFondo'],cfg)
+    scope=extraer('volar_ruta.py',['Evasion','_MidiendoFondo'],cfg)
     scope['VISION_MODELO']='depth_anything_v2_metrico'
     e_metrico=scope['Evasion'](SimpleNamespace())
     b.comprobar('modelo metrico fuerza observar activo',not e_metrico.esquiva and e_metrico.activa,
@@ -81,7 +81,7 @@ def main():
     class Modelo:
         def __init__(self,*args,**kw): llamadas.append((args,kw))
         def inferir(self,img): detener.set(); return img
-    worker=extraer_metodo('Prueba_ruta_vision.py','SistemaVision','_bucle_midas',
+    worker=extraer_metodo('sistema_vuelo.py','SistemaVision','_bucle_midas',
                           dict(_bajar_prioridad_hilo=lambda:None,VISION_MIDAS=True,
                                _HAY_TORCH=True,EstimadorMiDaS=Modelo,VISION_MODELO='depth_anything_v2',
                                VISION_DISPOSITIVO='cpu',VISION_DA_LADO=336,VISION_MIN_PERIODO=.2,time=time,
@@ -104,7 +104,7 @@ def main():
                 return np.full_like(img,25.)
             return img
     vision._entrada_midas=(imagen,124.)
-    worker=extraer_metodo('Prueba_ruta_vision.py','SistemaVision','_bucle_midas',
+    worker=extraer_metodo('sistema_vuelo.py','SistemaVision','_bucle_midas',
                           dict(_bajar_prioridad_hilo=lambda:None,VISION_MIDAS=True,
                                _HAY_TORCH=True,EstimadorMiDaS=ModeloHibrido,VISION_MODELO='hibrido',
                                VISION_DISPOSITIVO='cpu',VISION_DA_LADO=336,VISION_MIN_PERIODO=.2,time=time,

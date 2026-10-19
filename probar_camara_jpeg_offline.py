@@ -30,7 +30,7 @@ def constantes(archivo, nombres, entorno=None):
 
 def main():
     b = Banco()
-    archivo = 'Prueba_ruta_vision.py'
+    archivo = 'sistema_vuelo.py'
     env = constantes(archivo, ['PATRONES_BAYER', 'DEMOSAICO',
                                'VISION_JPEG_BAYER_GRIS', 'VISION_AJUSTES'],
                      dict(cv2=cv2, np=np, threading=threading, _HAY_CV2=True))
@@ -113,11 +113,11 @@ def main():
         def wait(self, dt):
             self.t += dt
 
-    config = constantes('Prueba_ruta_carrot.py',
+    config = constantes('volar_ruta.py',
                         ['EVASION_MODO', 'VISION_MODELO', 'EVASION_CAL_FORMATO'])
     reloj = Reloj()
     config.update(P=NS(stop_event=reloj), time=reloj)
-    guardia = extraer('Prueba_ruta_carrot.py',
+    guardia = extraer('volar_ruta.py',
                       ['_formato_camara', '_esperar_vision_lista'], config)
     for nombre, cuentas, cal, modelo, modo, esperado in [
             ('RAW coincide', {0: 9, 1: 2}, 'raw', 'midas', 'esquivar', True),

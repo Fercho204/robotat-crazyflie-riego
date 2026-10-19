@@ -16,7 +16,7 @@ def main():
     # Posición del EKF: objetos falsos y tiempos cortos, sin importar hardware.
     Pekf = NS(mocap_pose={'x': 1.0, 'y': 2.0, 'z': 0.1},
               stop_event=threading.Event())
-    listo = extraer('Prueba_ruta_carrot.py', ['_esperar_ekf_listo'],
+    listo = extraer('volar_ruta.py', ['_esperar_ekf_listo'],
                     dict(P=Pekf, time=time))['_esperar_ekf_listo']
 
     def caso_ekf(nombre, pose, esperado, minimo, cambios=(), maximo=1.5):
@@ -85,7 +85,7 @@ def main():
     caso_ekf('EKF sin pose_data: no despega', {}, False, 1.0)
 
     # Rampa pura: extremos, punto medio y monotonía (incluye saturación).
-    rampa = extraer('Prueba_ruta_carrot.py', ['_rampa_inicio'])['_rampa_inicio']
+    rampa = extraer('volar_ruta.py', ['_rampa_inicio'])['_rampa_inicio']
     for nombre, t, esperado in [('antes del inicio', 9.0, 0.0),
                                 ('en t0', 10.0, 0.0),
                                 ('a mitad', 11.5, 0.5),
@@ -105,7 +105,7 @@ def main():
 
     # Visión falsa, sin cargar modelos ni importar módulos de hardware.
     Pvision = NS(stop_event=threading.Event())
-    esperar = extraer('Prueba_ruta_carrot.py',
+    esperar = extraer('volar_ruta.py',
                       ['_formato_camara', '_esperar_vision_lista'],
                       dict(P=Pvision, time=time, EVASION_MODO='esquivar',
                            VISION_MODELO='midas', EVASION_CAL_FORMATO='raw')
@@ -149,7 +149,7 @@ def main():
     stop = threading.Event()
     P = NS(mocap_pose={'yaw': 0.0}, _mocap_ori={'w': 1}, stop_event=stop)
     tmp = tempfile.mkdtemp()
-    scope = extraer('Prueba_ruta_carrot.py',
+    scope = extraer('volar_ruta.py',
                     ['_wrap', '_yaw_ekf', '_yaw_mundo_del_mocap',
                      '_esperar_yaw_alineado', '_alinear_yaw_ekf',
                      '_guardar_registro_despegue'],
@@ -228,7 +228,7 @@ def main():
     # ── Motive tiene que ver el dron antes de despegar ──
     Pv = NS(_t_mocap_cambio=[0.0], MOCAP_CONGELADO_S=0.25,
             stop_event=threading.Event())
-    vivo = extraer('Prueba_ruta_carrot.py', ['_esperar_mocap_vivo'],
+    vivo = extraer('volar_ruta.py', ['_esperar_mocap_vivo'],
                    dict(P=Pv, time=time))['_esperar_mocap_vivo']
     fin = threading.Event()
 

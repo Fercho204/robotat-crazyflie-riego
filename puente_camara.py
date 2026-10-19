@@ -25,7 +25,7 @@ mismo reloj en todos los procesos). bytes_red es el acumulado de la sesión.
 Salida: código 2 = atasco (sin datos en el plazo), 3 = caída del enlace; el
 motivo va en una línea por stderr.
 
-Uso (lo lanza Prueba_ruta_vision.py):
+Uso (lo lanza sistema_vuelo.py):
     python puente_camara.py <ip> <puerto> <timeout_lectura_s>
 """
 import socket

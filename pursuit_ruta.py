@@ -5,7 +5,7 @@ de posición EN EL PC contra el MoCap.
 ORIGEN
 Portado de `nuevo metodo/Code_V1_backup/{pure_pursuit,trajectory}.py`, que
 tiene 15 vuelos medidos detrás. Se reúne aquí en un solo archivo para que
-Prueba_ruta_vision.py no dependa de esa carpeta.
+sistema_vuelo.py no dependa de esa carpeta.
 
 POR QUÉ ESTE MÉTODO Y NO go_to NI start_trajectory
 Es la diferencia estructural, y explica un factor 50 en el error medido:
