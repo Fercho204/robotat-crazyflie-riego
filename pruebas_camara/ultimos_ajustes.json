@@ -1,0 +1,33 @@
+{
+  "cfg": {
+    "realce": 2,
+    "clahe_clip": 30,
+    "clahe_tile": 8,
+    "gamma": 100,
+    "brillo": 0,
+    "contraste": 100,
+    "promedio": 1,
+    "denoise": 0,
+    "enfoque": 0,
+    "modo_color": 0,
+    "wb": 0,
+    "gan_r": 100,
+    "gan_b": 100,
+    "saturacion": 100,
+    "demosaico": 0,
+    "colormap": 0
+  },
+  "enlace": {
+    "fps": 6.089348690168694,
+    "kbps": 464.3275882952775,
+    "formato": "RAW",
+    "tam_medio": 79056.0,
+    "caidas": 0
+  },
+  "exposicion": {
+    "media": 120.8442369965594,
+    "contraste": 98.27073609440207,
+    "negros": 1.104280510018215,
+    "quemados": 21.009158065168993
+  }
+}

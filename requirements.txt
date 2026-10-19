@@ -1,0 +1,20 @@
+# Probado con Python 3.11.0 en Windows 11.
+# Instalar con:  py -3.11 -m pip install -r requirements.txt
+# torch y torchvision son las versiones para CPU, que se bajan de este índice.
+--extra-index-url https://download.pytorch.org/whl/cpu
+
+cflib==0.1.32
+numpy==2.4.4
+matplotlib==3.10.8
+shapely==2.1.2
+scipy==1.17.1
+paho-mqtt==2.1.0
+pyusb==1.3.1
+pillow==12.2.0
+opencv-python==5.0.0.93
+torch==2.13.0+cpu
+transformers==5.17.0
+
+# No se importan directamente, pero torch.hub los necesita para cargar MiDaS
+timm==1.0.28
+torchvision==0.28.0+cpu
